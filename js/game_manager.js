@@ -1,3 +1,6 @@
+NameArray = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+ValueArray = [4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536];
+
 function GameManager(size, InputManager, Actuator, StorageManager) {
   this.size           = size; // Size of the grid
   this.inputManager   = new InputManager;
@@ -68,7 +71,7 @@ GameManager.prototype.addStartTiles = function () {
 // Adds a tile in a random position
 GameManager.prototype.addRandomTile = function () {
   if (this.grid.cellsAvailable()) {
-    var value = Math.random() < 0.9 ? 2 : 4;
+    var value = Math.random() < 0.9 ? NameArray[0] : NameArray[1];
     var tile = new Tile(this.grid.randomAvailableCell(), value);
 
     this.grid.insertTile(tile);
@@ -154,9 +157,10 @@ GameManager.prototype.move = function (direction) {
 
         // Only one merger per row traversal?
         if (next && next.value === tile.value && !next.mergedFrom) {
-          var merged = new Tile(positions.next, tile.value * 2);
+          var pos =NameArray.indexOf(tile.value);
+          var merged = new Tile(positions.next, NameArray[pos+1]);
           merged.mergedFrom = [tile, next];
-
+           
           self.grid.insertTile(merged);
           self.grid.removeTile(tile);
 
@@ -164,7 +168,7 @@ GameManager.prototype.move = function (direction) {
           tile.updatePosition(positions.next);
 
           // Update the score
-          self.score += merged.value;
+          self.score += ValueArray[pos];
 
           // The mighty 2048 tile
           if (merged.value === 2048) self.won = true;
