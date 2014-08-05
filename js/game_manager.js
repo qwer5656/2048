@@ -1,4 +1,4 @@
-NameArray = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+NameArray = ['夏','商','西周','春秋','战国','秦','汉','三国','两晋','南北朝','隋','唐','五代十国','宋','元','明','清','民国','新中国'];
 
 function GameManager(size, InputManager, Actuator, StorageManager) {
   this.size           = size; // Size of the grid
